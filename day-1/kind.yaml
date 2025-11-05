@@ -1,0 +1,31 @@
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+name: shelby
+nodes:
+- role: control-plane
+  kubeadmConfigPatches:
+    - |
+      kind: InitConfiguration
+      nodeRegistration:
+        kubeletExtraArgs:
+          kube-reserved: "cpu=500m,memory=1Gi"
+          system-reserved: "cpu=500m,memory=1Gi"
+          enforce-node-allocatable: pods
+- role: worker
+  kubeadmConfigPatches:
+    - |
+      kind: JoinConfiguration
+      nodeRegistration:
+        kubeletExtraArgs:
+          kube-reserved: "cpu=500m,memory=1Gi"
+          system-reserved: "cpu=500m,memory=1Gi"
+          enforce-node-allocatable: pods
+- role: worker
+  kubeadmConfigPatches:
+    - |
+      kind: JoinConfiguration
+      nodeRegistration:
+        kubeletExtraArgs:
+          kube-reserved: "cpu=500m,memory=1Gi"
+          system-reserved: "cpu=500m,memory=1Gi"
+          enforce-node-allocatable: pods
