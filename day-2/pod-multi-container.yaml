@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multicontainer
+  labels:
+    app: webserver
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    resources:
+        limits:
+          memory: "512Mi"
+          cpu: "500m"
+        requests:
+          memory: "256Mi"
+          cpu: "250m"
+  - name: ubuntu
+    image: ubuntu:latest
+    command: ["/bin/bash", "-c", "--"]
+    args: ["while true; do sleep 30; done;"]
+    resources:
+        limits:
+          memory: "256Mi"
+          cpu: "250m"
+        requests:
+          memory: "128Mi"
+          cpu: "100m"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always

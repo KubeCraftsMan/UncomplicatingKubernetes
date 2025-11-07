@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: volume-empty-dir
+  labels:
+    app: volume-webhook
+spec:
+  containers:
+    - name: nginx
+      image: nginx:latest
+      volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: empty-dir-volume
+      resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  volumes:
+    - name: empty-dir-volume
+      emptyDir:
+        sizeLimit: 256Mi
