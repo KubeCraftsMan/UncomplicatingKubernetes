@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-startupprobe
+  labels:
+    app: nginx-startupprobe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-startupprobe
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nginx-startupprobe
+    spec:
+      containers:
+      - name: nginx-startupprobe
+        image: nginx
+        resources:
+          limits:
+            cpu: 1.0
+            memory: 128Mi
+          requests:
+            cpu: 0.5
+            memory: 64Mi
+        startupProbe: #  Initializing Startup Probe
+          httpGet: # HTTP GET request for startup probe
+            path: / # Path to check
+            port: 80 # Port to check
+          initialDelaySeconds: 5 # Delay before starting startup probe
+          periodSeconds: 10 # How often to perform the probe
+          timeoutSeconds: 5 # Timeout for each probe
+          failureThreshold: 12 # Number of failures before marking the container as failed
+          successThreshold: 1 # Number of successes before marking the container as successful

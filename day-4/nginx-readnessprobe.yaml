@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-readiness
+  labels:
+    app: nginx-readiness
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-readiness
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nginx-readiness
+    spec:
+      containers:
+      - name: nginx-readiness
+        image: nginx
+        resources:
+          limits:
+            cpu: 1.0
+            memory: 128Mi
+          requests:
+            cpu: 0.5
+            memory: 64Mi
+        readinessProbe: # Initializing Readiness Probe
+          exec: # Executing command for readiness probe
+            command: # Command to check readiness
+            - curl # Using curl to check readiness
+            - -f # Fail silently on server errors
+            - http://localhost:80/ # URL to check
+          initialDelaySeconds: 10 # Delay before starting readiness probe
+          periodSeconds: 10 # Frequency of readiness probe
+          timeoutSeconds: 5 # Timeout for readiness probe
+          failureThreshold: 3 # Failure threshold for readiness probe
+          successThreshold: 1 # Success threshold for readiness probe
