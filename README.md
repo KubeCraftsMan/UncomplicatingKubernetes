@@ -13,6 +13,7 @@ Each day folder contains YAML manifests and a README with concepts, file descrip
 | [Day 3](./day-3/) | Namespaces & Deployment Strategies | Namespace, RollingUpdate, Recreate, resource requests/limits |
 | [Day 4](./day-4/) | Workload Resources & Probes | ReplicaSet, Deployment, DaemonSet, Liveness/Readiness/Startup probes |
 | [Day 6](./day-6/) | Volumes & Storage | StorageClass, PersistentVolume, PersistentVolumeClaim |
+| [Day 7](./day-7/) | Services & StatefulSets | ClusterIP, Headless Service, StatefulSet, volumeClaimTemplates |
 
 ## Repository Structure
 
@@ -22,7 +23,8 @@ Each day folder contains YAML manifests and a README with concepts, file descrip
 ├── day-2/          # Pods
 ├── day-3/          # Namespaces and Deployment strategies
 ├── day-4/          # Workload controllers and health probes
-└── day-6/          # Persistent storage
+├── day-6/          # Persistent storage
+└── day-7/          # Services and StatefulSets
 ```
 
 ## Prerequisites
